@@ -43,3 +43,128 @@ class   MinCoins{
 	  
 	}
 }
+
+
+
+
+
+
+
+//or
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ { 
+     static class FastReader 
+    { 
+        BufferedReader br; 
+        StringTokenizer st; 
+  
+        public FastReader() 
+        { 
+            br = new BufferedReader(new
+                     InputStreamReader(System.in)); 
+        } 
+  
+        String next() 
+        { 
+            while (st == null || !st.hasMoreElements()) 
+            { 
+                try
+                { 
+                    st = new StringTokenizer(br.readLine()); 
+                } 
+                catch (IOException  e) 
+                { 
+                    e.printStackTrace(); 
+                } 
+            } 
+            return st.nextToken(); 
+        } 
+  
+        int nextInt() 
+        { 
+            return Integer.parseInt(next()); 
+        } 
+  
+        long nextLong() 
+        { 
+            return Long.parseLong(next()); 
+        } 
+  
+        double nextDouble() 
+        { 
+            return Double.parseDouble(next()); 
+        } 
+  
+        String nextLine() 
+        { 
+            String str = ""; 
+            try
+            { 
+                str = br.readLine(); 
+            } 
+            catch (IOException e) 
+            { 
+                e.printStackTrace(); 
+            } 
+            return str; 
+        } 
+    } 
+     static long min(int v,int a[],int l, HashMap<Integer,Long> h,int n){
+         
+         if(v==0)
+         return l;
+         
+        
+         if(h.containsKey(v))
+         return l+h.get(v);
+         
+          long temp=Integer.MAX_VALUE;
+          
+          for(int i=0;i<n;i++){
+              
+            if(a[i]>v)
+            continue;
+          temp=Math.min(temp,min(v-a[i],a,l+1,h,n));
+          }
+          
+          h.put(v,temp-l);
+          
+          return temp;
+         
+         
+     }
+     
+	public static void main (String[] args) throws IOException
+	 {
+	   
+	   FastReader s=new FastReader();
+	   int t=s.nextInt();
+  
+        while (t-- > 0) { 
+          
+           int v=s.nextInt();
+           int n=s.nextInt();
+           int a[]=new int[n];
+           
+           for(int i=0;i<n;i++)
+           a[i]=s.nextInt();
+           
+           HashMap<Integer,Long> h=new HashMap<>();
+           long p=min(v,a,0,h,n);
+           
+           if(p==Integer.MAX_VALUE)
+          System.out.println(-1);
+           else
+           System.out.println(p);
+        
+        }
+	  
+	  
+	 }
+}
+
